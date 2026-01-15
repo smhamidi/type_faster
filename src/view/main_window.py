@@ -38,6 +38,3 @@ class MainWindow(QtWidgets.QMainWindow):
 
     def init_ui(self):
         pass
-
-    def close_application(self):
-        pass
