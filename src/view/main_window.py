@@ -1,6 +1,6 @@
 from PyQt5 import QtWidgets
 from PyQt5.QtGui import QIcon
-from PyQt5.QtWidgets import QSystemTrayIcon
+from PyQt5.QtWidgets import QSystemTrayIcon, QMenu
 
 from src.util import init_screen_size
 from src import AppState
@@ -13,8 +13,15 @@ class MainWindow(QtWidgets.QMainWindow):
         super().__init__()
         self.icon = QIcon(ICON_PATH)
         self.setWindowIcon(self.icon)
+
+        # Tray icon
         self.tray_icon = QSystemTrayIcon()
         self.tray_icon.setIcon(self.icon)
+
+        self.tray_menu = QMenu(self)
+
+        # Set the menu on the system tray icon
+        self.tray_icon.setContextMenu(self.tray_menu)
         self.tray_icon.show()
 
         self.app_state = app_state
@@ -30,4 +37,7 @@ class MainWindow(QtWidgets.QMainWindow):
         self.controller = Controller(self, self.app_state)
 
     def init_ui(self):
+        pass
+
+    def close_application(self):
         pass

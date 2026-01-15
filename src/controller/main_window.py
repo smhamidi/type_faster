@@ -1,6 +1,9 @@
 from typing import TYPE_CHECKING
 
 from PyQt5.QtCore import QObject
+from PyQt5.QtWidgets import QAction
+from PyQt5.QtCore import QCoreApplication
+
 from src import AppState
 
 if TYPE_CHECKING:
@@ -16,6 +19,7 @@ class Controller(QObject):
         self.sensitive_states_ui = {None}
 
         self.app_state.state_changed.connect(self.render_view)
+        self.init_tray_icon_menubar()
         self.render_view()
 
     def render_view(self, state_name=None, value=None):
@@ -23,3 +27,19 @@ class Controller(QObject):
             return
 
         pass
+
+    def init_tray_icon_menubar(self):
+        # Tray icon: Minimize action
+        minimize_action = QAction("Minimize", self)
+        minimize_action.triggered.connect(self.view.showMinimized)
+        self.view.tray_menu.addAction(minimize_action)
+
+        # Tray icon: Maximize action
+        maximize_action = QAction("Maximize", self)
+        maximize_action.triggered.connect(self.view.showMaximized)
+        self.view.tray_menu.addAction(maximize_action)
+
+        # Tray icon: Quit action
+        quit_action = QAction("Quit", self)
+        quit_action.triggered.connect(QCoreApplication.instance().quit)
+        self.view.tray_menu.addAction(quit_action)
