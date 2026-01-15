@@ -1,0 +1,4 @@
+# Python 12 recommended
+PyQt5>=5.15.7
+screeninfo
+beautifulsoup4
