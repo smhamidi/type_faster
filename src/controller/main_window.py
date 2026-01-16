@@ -29,15 +29,15 @@ class Controller(QObject):
         pass
 
     def init_tray_icon_menubar(self):
-        # Tray icon: Minimize action
-        minimize_action = QAction("Minimize", self)
-        minimize_action.triggered.connect(self.view.showMinimized)
-        self.view.tray_menu.addAction(minimize_action)
+        # Tray icon: Show action
+        show_action = QAction("Show", self)
+        show_action.triggered.connect(self.view.showMaximized)
+        self.view.tray_menu.addAction(show_action)
 
-        # Tray icon: Maximize action
-        maximize_action = QAction("Maximize", self)
-        maximize_action.triggered.connect(self.view.showMaximized)
-        self.view.tray_menu.addAction(maximize_action)
+        # Tray icon: Hide action
+        hide_action = QAction("Hide", self)
+        hide_action.triggered.connect(self.view.showMinimized)
+        self.view.tray_menu.addAction(hide_action)
 
         # Tray icon: Quit action
         quit_action = QAction("Quit", self)

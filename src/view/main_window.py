@@ -28,7 +28,7 @@ class MainWindow(QtWidgets.QMainWindow):
         (width, height, start_x, start_y) = init_screen_size()
 
         self.setGeometry(start_x, start_y, width, height)
-        self.setMinimumSize(width * 8 // 10, height * 8 // 10)
+        self.setFixedSize(width, height)
 
         self.setWindowTitle(f"Faster Type")
 
