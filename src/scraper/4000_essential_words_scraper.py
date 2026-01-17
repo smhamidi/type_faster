@@ -11,7 +11,7 @@ parent_dir = path.parents[2]
 if not parent_dir in sys.path:
     sys.path.insert(0, str(parent_dir))
 
-from config.paths import ROOT_DIR
+from config.path import ROOT_DIR
 
 
 def get_book_links():

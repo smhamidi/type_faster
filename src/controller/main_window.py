@@ -1,10 +1,9 @@
 from typing import TYPE_CHECKING
 
 from PyQt5.QtCore import QObject
-from PyQt5.QtWidgets import QAction
-from PyQt5.QtCore import QCoreApplication
 
 from src import AppState
+from config.color import MAIN_BACKGROUND
 
 if TYPE_CHECKING:
     from src.view.main_window import MainWindow
@@ -16,30 +15,56 @@ class Controller(QObject):
         self.view = view
 
         self.app_state = app_state
-        self.sensitive_states_ui = {None}
+        self.sensitive_states_ui = {"main_window_width", "main_window_height", None}
 
         self.app_state.state_changed.connect(self.render_view)
-        self.init_tray_icon_menubar()
         self.render_view()
 
     def render_view(self, state_name=None, value=None):
         if state_name not in self.sensitive_states_ui:
             return
 
-        pass
+        if (
+            self.app_state.main_window_width == 0
+            or self.app_state.main_window_height == 0
+        ):
+            return
 
-    def init_tray_icon_menubar(self):
-        # Tray icon: Minimize action
-        minimize_action = QAction("Minimize", self)
-        minimize_action.triggered.connect(self.view.showMinimized)
-        self.view.tray_menu.addAction(minimize_action)
+        self.render_style()
 
-        # Tray icon: Maximize action
-        maximize_action = QAction("Maximize", self)
-        maximize_action.triggered.connect(self.view.showMaximized)
-        self.view.tray_menu.addAction(maximize_action)
+        # Calculating Optimal Size for Virtual Keyboard
+        VK_H = self.app_state.main_window_height // 3
+        VK_W = VK_H * 100 // 34  # Required width
 
-        # Tray icon: Quit action
-        quit_action = QAction("Quit", self)
-        quit_action.triggered.connect(QCoreApplication.instance().quit)
-        self.view.tray_menu.addAction(quit_action)
+        # if we don't have enough width: Do reverse
+        if VK_W > (self.app_state.main_window_width * 95 // 100):
+            VK_W = self.app_state.main_window_width * 95 // 100
+            VK_H = VK_W * 34 // 100
+
+        self.app_state.vk_width = VK_W
+        self.app_state.vk_height = VK_H
+
+        self.app_state.stat_height = self.app_state.main_window_height // 24
+        self.app_state.stat_width = self.app_state.vk_width
+
+        self.app_state.tb_height = self.app_state.vk_height
+        self.app_state.tb_width = self.app_state.vk_width
+
+        self.view.main_layout.setSpacing(self.app_state.stat_height // 2)
+
+        self.view.statistic.setFixedSize(
+            self.app_state.stat_width, self.app_state.stat_height
+        )
+        self.view.text_block.setFixedSize(
+            self.app_state.tb_width, self.app_state.tb_height
+        )
+        self.view.virtual_keyboard.setFixedSize(
+            self.app_state.vk_width, self.app_state.vk_height
+        )
+
+    def render_style(self):
+        self.view.setStyleSheet(
+            f"""
+            background-color:{MAIN_BACKGROUND};
+            """
+        )

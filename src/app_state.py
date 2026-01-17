@@ -34,6 +34,25 @@ class AppState(QObject):
 
     # States defines here
 
+    # Main Window States
+    main_window_width: int = State(0)
+    main_window_height: int = State(0)
+
+    # Statistic States
+    stat_width: int = State(0)
+    stat_height: int = State(0)
+
+    # Text Block States
+    tb_width: int = State(0)
+    tb_height: int = State(0)
+
+    # Virtual Keyboard State
+    vk_width: int = State(0)
+    vk_height: int = State(0)
+
+    # Virtual Keyboard States
+    pushed_keys: set = State(set())
+
     def __init__(self):
         if AppState._instantiated:
             print("Error: Only one AppState object can be created. Exit...")
