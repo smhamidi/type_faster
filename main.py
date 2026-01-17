@@ -5,7 +5,7 @@ from PyQt5 import QtWidgets, QtGui
 
 from src.view import MainWindow
 from src.app_state import AppState
-from config.paths import ICON_PATH
+from config.path import ICON_PATH
 
 
 if __name__ == "__main__":
