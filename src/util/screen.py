@@ -1,12 +1,18 @@
 from screeninfo import get_monitors
 
 
-def init_screen_size():
+def main_display_size():
     for monitor in get_monitors():
         if monitor.is_primary:
-            SCREEN_HEIGHT = monitor.height * 75 // 100
-            SCREEN_WIDTH = monitor.width * 75 // 100
-            SCREEN_TOP_X = (monitor.width - SCREEN_WIDTH) // 2
-            SCREEN_TOP_Y = (monitor.height - SCREEN_HEIGHT) // 2
+            return (monitor.width, monitor.height)
+    return (None, None)
 
-    return (SCREEN_WIDTH, SCREEN_HEIGHT, SCREEN_TOP_X, SCREEN_TOP_Y)
+
+def initial_app_size_pos():
+    (SCREEN_WIDTH, SCREEN_HEIGHT) = main_display_size()
+    APP_HEIGHT = SCREEN_HEIGHT * 75 // 100
+    APP_WIDTH = SCREEN_WIDTH * 75 // 100
+    APP_TOP_X = (SCREEN_WIDTH - APP_WIDTH) // 2
+    APP_TOP_Y = (SCREEN_HEIGHT - APP_HEIGHT) // 2
+
+    return (APP_WIDTH, APP_HEIGHT, APP_TOP_X, APP_TOP_Y)
