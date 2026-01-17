@@ -16,14 +16,16 @@ class State:
     def __get__(self, instance, owner):
         if instance is None:
             return self
+
         return instance.__dict__.get(self._name, self._default)
 
     def __set__(self, instance, value):
         current_value = instance.__dict__.get(self._name, self._default)
-
+        print(current_value)
         if current_value != value:
             instance.__dict__[self._name] = value
             instance.state_changed.emit(self._name, value)
+            print('following_set_name')
 
 
 class AppState(QObject):

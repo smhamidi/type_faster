@@ -9,6 +9,7 @@ from config.color import (
     VIRTUAL_KEYBOARD_BUTTON_BACKGROUND,
     VIRTUAL_KEYBOARD_BUTTON_TEXT,
     MAIN_BACKGROUND,
+    VIRTUAL_KEYBOARD_BUTTON_PUSHED,
 )
 
 if TYPE_CHECKING:
@@ -21,12 +22,13 @@ class Controller(QObject):
         self.view = view
 
         self.app_state = app_state
-        self.sensitive_states_ui = {"vk_width", "vk_height", None}
+        self.sensitive_states_ui = {"vk_width", "vk_height", "pushed_keys", None}
 
         self.app_state.state_changed.connect(self.render_view)
         self.render_view()
 
     def render_view(self, state_name=None, value=None):
+
         if state_name not in self.sensitive_states_ui:
             return
 
@@ -61,6 +63,10 @@ class Controller(QObject):
                 # Coloring keys
                 if "empty" in key["type"]:
                     bg_color = MAIN_BACKGROUND
+
+                elif list(key['code'])[0] == value:
+                    bg_color = VIRTUAL_KEYBOARD_BUTTON_PUSHED
+
                 else:
                     bg_color = VIRTUAL_KEYBOARD_BUTTON_BACKGROUND
 
