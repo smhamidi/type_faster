@@ -5,6 +5,7 @@ from PyQt5.QtGui import QFont
 
 from src import AppState
 from config.color import STATISTIC_BACKGROUND, STATISTIC_TEXT, STATISTIC_BORDER
+from config.style import BORDER_RADIUS
 
 
 if TYPE_CHECKING:
@@ -44,5 +45,6 @@ class Controller(QObject):
             background-color:{STATISTIC_BACKGROUND};
             color:{STATISTIC_TEXT};
             border: 1px solid {STATISTIC_BORDER};
+            border-radius: {BORDER_RADIUS}px;
             """
         )
