@@ -1,1 +1,1 @@
-BORDER_RADIUS = 6 # Pixel
+BORDER_RADIUS = 6  # Pixel
