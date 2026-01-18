@@ -1,6 +1,8 @@
 from PyQt5.QtWidgets import QLabel
 from PyQt5.QtCore import Qt
 
+from config.style import BORDER_RADIUS
+
 
 def create_keyboard_key(
     char_list,
@@ -50,7 +52,7 @@ def create_keyboard_key(
             text-align: center;
             font-size: {font_size}px;
             padding: 5px;
-            border-radius: 5px
+            border-radius: {BORDER_RADIUS}px
         }}
     """
     )

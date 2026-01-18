@@ -15,6 +15,7 @@ from config.color import (
 )
 from config.corpus import DEFAULT_CORPUS_PATH
 from config.text_block import NUM_WORD_FOR_EACH_ROUND
+from config.style import BORDER_RADIUS
 
 if TYPE_CHECKING:
     from src.view.widget import TextBlock
@@ -61,6 +62,7 @@ class Controller(QObject):
             background-color:{TEXT_BLOCK_BACKGROUND};
             color:{TEXT_BLOCK_TEXT};
             border: 1px solid {TEXT_BLOCK_BORDER};
+            border-radius: {BORDER_RADIUS}px;
             """
         )
 
