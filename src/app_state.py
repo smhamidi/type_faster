@@ -16,11 +16,11 @@ class State:
     def __get__(self, instance, owner):
         if instance is None:
             return self
+
         return instance.__dict__.get(self._name, self._default)
 
     def __set__(self, instance, value):
         current_value = instance.__dict__.get(self._name, self._default)
-
         if current_value != value:
             instance.__dict__[self._name] = value
             instance.state_changed.emit(self._name, value)
@@ -51,7 +51,7 @@ class AppState(QObject):
     vk_height: int = State(0)
 
     # Virtual Keyboard States
-    pushed_keys: set = State(set())
+    pushed_keys: set = State(list())
 
     def __init__(self):
         if AppState._instantiated:

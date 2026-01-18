@@ -97,11 +97,17 @@ class MainWindow(QtWidgets.QMainWindow):
     def eventFilter(self, obj, event):
         if event.type() == QEvent.KeyPress:
             key = event.key()
-            self.app_state.pushed_keys.add(key)
+
+            pushed_key_set = set(self.app_state.pushed_keys)
+            pushed_key_set.add(key)
+            self.app_state.pushed_keys = list(pushed_key_set)
             return True
         elif event.type() == QEvent.KeyRelease:
             key = event.key()
-            self.app_state.pushed_keys.discard(key)
+
+            pushed_key_set = set(self.app_state.pushed_keys)
+            pushed_key_set.discard(key)
+            self.app_state.pushed_keys = list(pushed_key_set)
             return True
         else:
             return super().eventFilter(obj, event)
