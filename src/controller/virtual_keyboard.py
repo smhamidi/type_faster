@@ -64,7 +64,7 @@ class Controller(QObject):
                 if "empty" in key["type"]:
                     bg_color = MAIN_BACKGROUND
 
-                elif list(key['code'])[0] == value:
+                elif key["code"].intersection(self.app_state.pushed_keys) == value:
                     bg_color = VIRTUAL_KEYBOARD_BUTTON_PUSHED
 
                 else:
