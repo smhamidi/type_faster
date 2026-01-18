@@ -21,7 +21,7 @@ class TextBlock(QWidget):
         layout.setSpacing(0)
         layout.setAlignment(Qt.AlignLeft | Qt.AlignTop)
 
-        self.label = QLabel("Text Block ...")
+        self.label = QLabel("")
         self.label.setContentsMargins(0, 0, 0, 0)
         self.label.setWordWrap(True)
         self.label.setAlignment(Qt.AlignLeft | Qt.AlignTop)
