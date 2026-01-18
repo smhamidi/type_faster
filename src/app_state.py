@@ -51,7 +51,7 @@ class AppState(QObject):
     vk_height: int = State(0)
 
     # Virtual Keyboard States
-    pushed_keys: set = State(set())
+    pushed_keys: set = State(list())
 
     def __init__(self):
         if AppState._instantiated:

@@ -60,11 +60,12 @@ class Controller(QObject):
             for column, key in inner_dict.items():
                 key_width, key_height = self.calculate_size(key["type"])
 
+                pushed_key_set = set(self.app_state.pushed_keys)
                 # Coloring keys
                 if "empty" in key["type"]:
                     bg_color = MAIN_BACKGROUND
 
-                elif key["code"].intersection(self.app_state.pushed_keys) == value:
+                elif key["code"].intersection(pushed_key_set):
                     bg_color = VIRTUAL_KEYBOARD_BUTTON_PUSHED
 
                 else:

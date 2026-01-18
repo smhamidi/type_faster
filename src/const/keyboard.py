@@ -95,7 +95,12 @@ keyboard = {
         14: {"text": ["delete"], "code": {16777219}, "type": "rec-s", "side": "r"},
     },
     2: {
-        1: {"text": ["tab"], "code": {16777217}, "type": "rec-s", "side": "l"},
+        1: {
+            "text": ["tab"],
+            "code": {16777217, 16777218},
+            "type": "rec-s",
+            "side": "l",
+        },
         2: {"text": ["Q"], "code": {81}, "type": "square", "side": "c"},
         3: {"text": ["W"], "code": {87}, "type": "square", "side": "c"},
         4: {"text": ["E"], "code": {69}, "type": "square", "side": "c"},
@@ -121,7 +126,7 @@ keyboard = {
         8: {"text": ["J"], "code": {74}, "type": "square", "side": "c"},
         9: {"text": ["K"], "code": {75}, "type": "square", "side": "c"},
         10: {"text": ["L"], "code": {76}, "type": "square", "side": "c"},
-        11: {"text": [":", ";"], "code": {59, 39}, "type": "square", "side": "c"},
+        11: {"text": [":", ";"], "code": {59, 58}, "type": "square", "side": "c"},
         12: {"text": ['"', "'"], "code": {34, 39}, "type": "square", "side": "c"},
         13: {"text": ["return"], "code": {16777220}, "type": "rec-m", "side": "r"},
     },
