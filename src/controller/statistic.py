@@ -18,7 +18,13 @@ class Controller(QObject):
         self.view = view
 
         self.app_state = app_state
-        self.sensitive_states_ui = {"stat_width", "stat_height", None}
+        self.sensitive_states_ui = {
+            "stat_width",
+            "stat_height",
+            "round_result",
+            "start_time",
+            None,
+        }
 
         self.app_state.state_changed.connect(self.render_view)
         self.render_view()
@@ -30,9 +36,16 @@ class Controller(QObject):
         if self.app_state.stat_width == 0 or self.app_state.stat_height == 0:
             return
 
-        self.view.setFixedSize(self.app_state.tb_width, self.app_state.tb_height)
+        if state_name == "round_result":
+            self.show_result()
 
+        self.view.setFixedSize(self.app_state.stat_width, self.app_state.stat_height)
         self.render_style()
+
+    def show_result(self):
+        self.view.label.setText(
+            f'Speed (WPM): {self.app_state.round_result.get("wpm", "")} | Duration: {self.app_state.round_result.get("duration", "")}'
+        )
 
     def render_style(self):
         font = QFont()

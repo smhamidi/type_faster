@@ -20,7 +20,7 @@ class Statistic(QWidget):
         self.main_layout.setSpacing(0)
 
         self.label = QLabel()
-        self.label.setText("Speed(WPM):")
+        self.label.setText("Speed (WPM): | Duration: ")
         self.main_layout.addWidget(self.label)
 
         self.setLayout(self.main_layout)

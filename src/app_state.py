@@ -1,4 +1,5 @@
 import sys
+import time
 
 from PyQt5.QtCore import QObject, pyqtSignal
 
@@ -41,6 +42,9 @@ class AppState(QObject):
     # Statistic States
     stat_width: int = State(0)
     stat_height: int = State(0)
+    start_time: float = State(0.0)
+    has_round_started: bool = State(False)
+    round_result: dict = State(dict())
 
     # Text Block States
     tb_width: int = State(0)

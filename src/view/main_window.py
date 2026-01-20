@@ -111,7 +111,12 @@ class MainWindow(QtWidgets.QMainWindow):
 
             if key in key_to_char:
                 char = key_to_char[key]
-                if char in writable_keys or char == "delete" or char == "space":
+                if (
+                    char in writable_keys
+                    or char == "delete"
+                    or char == "space"
+                    or char == "esc"
+                ):
                     if (
                         char in normal_keys
                         and char_to_key["shift"] in self.app_state.pushed_keys

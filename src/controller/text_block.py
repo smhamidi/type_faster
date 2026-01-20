@@ -1,5 +1,6 @@
 from typing import TYPE_CHECKING, List
 import random
+import time
 
 from PyQt5.QtCore import QObject
 from PyQt5.QtGui import QFont
@@ -51,6 +52,7 @@ class Controller(QObject):
             return
 
         if state_name == "success_round":
+            self.save_result()
             self.reset()
             self.render_new_words()
 
@@ -101,7 +103,14 @@ class Controller(QObject):
                 self.app_state.typed_text = self.app_state.typed_text[:-1]
         elif self.app_state.last_pushed_button == "space":
             self.app_state.typed_text += " "
+        elif self.app_state.last_pushed_button == "esc":
+            self.reset()
+            self.app_state.has_round_started = False
         else:
+            if self.app_state.has_round_started == False:
+                self.app_state.start_time = time.time()
+                self.app_state.has_round_started = True
+
             self.app_state.typed_text = self.app_state.typed_text + str(
                 self.app_state.last_pushed_button
             )
@@ -151,6 +160,13 @@ class Controller(QObject):
 
         # They fully match
         return i + 1
+
+    def save_result(self):
+        duration = time.time() - self.app_state.start_time
+        letter_count = len(self.app_state.text_block)
+        wpm = letter_count * 12.0 / duration
+        result = {"duration": round(duration, 2), "wpm": round(wpm, 2)}
+        self.app_state.round_result = result
 
     def reset(self):
         self.app_state.last_pushed_button = ""
