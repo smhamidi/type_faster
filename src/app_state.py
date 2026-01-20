@@ -47,6 +47,8 @@ class AppState(QObject):
     tb_height: int = State(0)
     success_round: int = State(0)
     text_block: str = State("")
+    typed_text: str = State("")
+    last_pushed_button: str = State("")
 
     # Virtual Keyboard State
     vk_width: int = State(0)

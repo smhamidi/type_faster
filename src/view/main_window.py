@@ -12,6 +12,13 @@ from config.path import ICON_PATH
 from src.view.widget import Statistic
 from src.view.widget import TextBlock
 from src.view.widget import VirtualKeyboard
+from src.const import (
+    writable_keys,
+    key_to_char,
+    normal_keys,
+    normal_to_shift,
+    char_to_key,
+)
 
 
 class MainWindow(QtWidgets.QMainWindow):
@@ -101,6 +108,18 @@ class MainWindow(QtWidgets.QMainWindow):
             pushed_key_set = set(self.app_state.pushed_keys)
             pushed_key_set.add(key)
             self.app_state.pushed_keys = list(pushed_key_set)
+
+            if key in key_to_char:
+                char = key_to_char[key]
+                if char in writable_keys or char == "delete" or char == "space":
+                    if (
+                        char in normal_keys
+                        and char_to_key["shift"] in self.app_state.pushed_keys
+                    ):
+                        self.app_state.last_pushed_button = normal_to_shift[char]
+                    else:
+                        self.app_state.last_pushed_button = char
+
             return True
         elif event.type() == QEvent.KeyRelease:
             key = event.key()
