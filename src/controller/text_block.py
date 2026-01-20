@@ -91,7 +91,7 @@ class Controller(QObject):
 
     def render_new_words(self):
         selected_words = random.choices(self.corpus, k=NUM_WORD_FOR_EACH_ROUND)
-        self.app_state.text_block = " ".join(selected_words).lower()
+        self.app_state.text_block = " ".join(selected_words)
 
         self.view.label.setText(self.app_state.text_block)
 
