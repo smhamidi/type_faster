@@ -171,3 +171,4 @@ class Controller(QObject):
     def reset(self):
         self.app_state.last_pushed_button = ""
         self.app_state.typed_text = ""
+        self.app_state.has_round_started = False
