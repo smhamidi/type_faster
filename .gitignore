@@ -337,3 +337,4 @@ database/data/*
 
 # Cached Frame
 .cache/*
+*.dmg
